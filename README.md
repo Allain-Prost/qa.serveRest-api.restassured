@@ -4,7 +4,7 @@ Bem-vindo ao repositório `qa.serveRest-api.restassured`! Este é um projeto de 
 
 ## Sobre o Rest Assured
 
-Rest Assured é um framework Java que simplifica o teste e a validação de serviços REST. Ele oferece uma linguagem específica de domínio (DSL) amigável que descreve uma conexão com um serviço HTTP e espera respostas. Com o Rest Assured, você pode validar e verificar as respostas mais comumente usadas pelos verbos HTTP, como GET, POST, PUT/PATCH DELETE, OPTIONS, HEAD³.
+Rest Assured é um framework Java que simplifica o teste e a validação de serviços REST. Ele oferece uma linguagem específica de domínio (DSL) amigável que descreve uma conexão com um serviço HTTP e espera respostas. Com o Rest Assured, você pode validar e verificar as respostas mais comumente usadas pelos verbos HTTP, como GET, POST, PUT/PATCH DELETE, OPTIONS, HEAD.
 
 ## Objetivo do Projeto
 
