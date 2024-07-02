@@ -11,7 +11,6 @@ import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import static org.hamcrest.Matchers.*;
 
-
 @Execution(ExecutionMode.CONCURRENT)
 public class RealizarLoginTest extends Base {
 

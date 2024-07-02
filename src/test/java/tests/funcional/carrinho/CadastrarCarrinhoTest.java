@@ -5,6 +5,8 @@ import core.service.login.RealizarLoginRequest;
 import core.service.produto.CadastrarProdutoRequest;
 import core.service.usuarios.CriarUsuarioRequest;
 import data.constants.MessagesUtils;
+import data.produto.ProdutoData;
+import data.usuario.UsuarioData;
 import tests.funcional.base.Base;
 import data.utils.Utils;
 import org.hamcrest.Matchers;
@@ -21,6 +23,7 @@ public class CadastrarCarrinhoTest extends Base {
     static CriarUsuarioRequest postCriarUsuarioRequest = new CriarUsuarioRequest();
     static RealizarLoginRequest realizarLoginRequest = new RealizarLoginRequest();
     static CadastrarCarrinhoRequest cadastrarCarrinhoRequest = new CadastrarCarrinhoRequest();
+    static ProdutoData produtoData = ProdutoData.createTC70();
     static String adminToken;
     static String idProduto;
     static String nomeProduto = Utils.faker.commerce().productName();
@@ -33,16 +36,15 @@ public class CadastrarCarrinhoTest extends Base {
     }
 
     private static void setUpAdminUser() {
-        String adminEmail = Utils.faker.internet().emailAddress();
-        String adminPassword = Utils.faker.internet().password();
+        UsuarioData usuarioData = UsuarioData.createTC01();
+        String adminEmail = usuarioData.getEmail();
+        String adminPassword = usuarioData.getPassword();
 
-        postCriarUsuarioRequest.montarDadosUsuario(Utils.faker.name().firstName(), adminEmail, adminPassword, "true");
-
+        postCriarUsuarioRequest.montarDadosUsuario(usuarioData.getName(), adminEmail, adminPassword,
+                usuarioData.getAdministrador());
         adminToken = realizarLoginRequest.montarDadosLogin(adminEmail, adminPassword)
                 .then().statusCode(200).extract().path("authorization");
-
-        idProduto = cadastrarProdutoRequest.montarDadosProduto(adminToken, nomeProduto, Utils.faker.number().numberBetween(1, 100),
-                        Utils.faker.lorem().paragraph(), Utils.faker.number().numberBetween(1, 100))
+        idProduto =  cadastrarProdutoRequest.montarDadosProduto(adminToken, nomeProduto, produtoData.getPreco(), produtoData.getDescricao(), produtoData.getQuantidade())
                 .then().statusCode(201).extract().path("_id");
     }
 
