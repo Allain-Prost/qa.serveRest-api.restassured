@@ -1,4 +1,4 @@
-package core.service.login;
+package core.controller.login;
 
 import io.restassured.response.Response;
 import org.json.simple.JSONObject;

@@ -1,6 +1,6 @@
 package tests.funcional.usuarios;
 
-import core.service.usuarios.CriarUsuarioRequest;
+import core.controller.usuarios.CriarUsuarioRequest;
 import tests.funcional.base.Base;
 import data.usuario.UsuarioData;
 import org.junit.jupiter.api.Test;

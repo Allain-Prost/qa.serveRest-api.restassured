@@ -1,4 +1,4 @@
-package core.service.carrinho;
+package core.controller.carrinho;
 
 import io.restassured.response.Response;
 import org.json.JSONArray;

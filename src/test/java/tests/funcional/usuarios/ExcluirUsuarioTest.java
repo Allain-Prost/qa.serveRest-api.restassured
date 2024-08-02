@@ -1,7 +1,7 @@
 package tests.funcional.usuarios;
 
-import core.service.usuarios.CriarUsuarioRequest;
-import core.service.usuarios.ExcluirUsuarioRequest;
+import core.controller.usuarios.CriarUsuarioRequest;
+import core.controller.usuarios.ExcluirUsuarioRequest;
 import data.usuario.UsuarioData;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;

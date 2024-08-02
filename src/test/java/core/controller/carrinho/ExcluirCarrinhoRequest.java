@@ -1,18 +1,17 @@
-package core.service.produto;
+package core.controller.carrinho;
 
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
-public class ExcluirProdutoRequest {
+public class ExcluirCarrinhoRequest {
 
-    public static Response montarDadosProdutoPorId(String token, String id) {
+    public static Response montarDadosExcluirCarrinho(String token) {
 
         return given()
                 .header("Content-Type", "application/json")
                 .header("authorization", token)
                 .when()
-                .pathParam("_id", id)
-                .delete("/produtos/{_id}");
+                .delete("/carrinhos/cancelar-compra");
     }
 }
