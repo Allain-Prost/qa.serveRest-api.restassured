@@ -1,4 +1,4 @@
-package core.service.usuarios;
+package core.controller.usuarios;
 
 import io.restassured.response.Response;
 import org.json.simple.JSONObject;

@@ -1,13 +1,13 @@
-package core.service.produto;
+package core.controller.produto;
 
 import io.restassured.response.Response;
 import org.json.simple.JSONObject;
 
 import static io.restassured.RestAssured.given;
 
-public class EditarProdutoRequest {
+public class CadastrarProdutoRequest {
 
-    public static Response montarDadosProduto(String token, String id, String nome, int preco, String descricao, int quantidade) {
+    public static Response montarDadosProduto(String token, String nome, Integer preco, String descricao, Integer quantidade) {
 
         JSONObject payload = new JSONObject();
         payload.put("nome", nome);
@@ -18,9 +18,8 @@ public class EditarProdutoRequest {
         return given()
                 .header("Content-Type", "application/json")
                 .header("authorization", token)
-                .pathParam("_id", id)
                 .when()
                 .body(payload.toString())
-                .put("/produtos/{_id}");
+                .post("/produtos");
     }
 }

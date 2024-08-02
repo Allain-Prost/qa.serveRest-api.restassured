@@ -1,7 +1,8 @@
 package tests.funcional.login;
 
-import core.service.login.RealizarLoginRequest;
-import core.service.usuarios.CriarUsuarioRequest;
+import core.controller.login.RealizarLoginRequest;
+import core.controller.usuarios.CriarUsuarioRequest;
+import org.junit.jupiter.api.BeforeAll;
 import tests.funcional.base.Base;
 import data.constants.MessagesUtils;
 import data.login.LoginData;
@@ -9,6 +10,7 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
+
 import static org.hamcrest.Matchers.*;
 
 @Execution(ExecutionMode.CONCURRENT)
@@ -16,18 +18,26 @@ public class RealizarLoginTest extends Base {
 
     static RealizarLoginRequest realizarLoginRequest = new RealizarLoginRequest();
     static CriarUsuarioRequest postCriarUsuarioRequest = new CriarUsuarioRequest();
+    static LoginData loginAdmin;
+    static LoginData loginCliente;
 
-    public void criarUsuario(LoginData loginData) {
+    @BeforeAll
+    public static void setUp() {
+        loginAdmin = LoginData.createTC060();
+        loginCliente = LoginData.createTC062();
+
         postCriarUsuarioRequest.montarDadosUsuario(
-                loginData.name, loginData.email, loginData.password, loginData.administrador
+                loginAdmin.name, loginAdmin.email, loginAdmin.password, loginAdmin.administrador
+        ).then().statusCode(201);
+        postCriarUsuarioRequest.montarDadosUsuario(
+                loginCliente.name, loginCliente.email, loginCliente.password, loginCliente.administrador
         ).then().statusCode(201);
     }
 
     @Test
     public void testDeveRealizarLoginComUsuarioDoTipoAdm() {
-        LoginData loginData = LoginData.createTC060();
-        criarUsuario(loginData);
-        realizarLoginRequest.montarDadosLogin(loginData.email, loginData.password)
+
+        realizarLoginRequest.montarDadosLogin(loginAdmin.email, loginAdmin.password)
                 .then().statusCode(200)
                 .body("", hasKey("authorization"))
                 .body("authorization", instanceOf(String.class))
@@ -37,9 +47,8 @@ public class RealizarLoginTest extends Base {
 
     @Test
     public void testDeveRealizarLoginComUsuarioDoTipoCliente() {
-        LoginData loginData = LoginData.createTC062();
-        criarUsuario(loginData);
-        realizarLoginRequest.montarDadosLogin(loginData.email, loginData.password)
+
+        realizarLoginRequest.montarDadosLogin(loginCliente.email, loginCliente.password)
                 .then().statusCode(200)
                 .body("", hasKey("authorization"))
                 .body("authorization", instanceOf(String.class))
@@ -49,18 +58,17 @@ public class RealizarLoginTest extends Base {
 
     @Test
     public void testDeveRealizarLoginComCredenciaisInvalidasParaUsuarioDoTipoAdm() {
-        LoginData loginData = LoginData.createTC060();
-        criarUsuario(loginData);
-        realizarLoginRequest.montarDadosLogin(loginData.email, MessagesUtils.PASSWORD_INVALIDO)
+
+        realizarLoginRequest.montarDadosLogin(loginAdmin.email, MessagesUtils.PASSWORD_INVALIDO)
                 .then().statusCode(401)
                 .body("message", Matchers.is(MessagesUtils.EMAIL_SENHA_INVALIDOS));
     }
 
+
     @Test
     public void testDeveRealizarLoginComCredenciaisInvalidasParaUsuarioDoTipoCliente() {
-        LoginData loginData = LoginData.createTC062();
-        criarUsuario(loginData);
-        realizarLoginRequest.montarDadosLogin(loginData.email, MessagesUtils.PASSWORD_INVALIDO)
+
+        realizarLoginRequest.montarDadosLogin(loginCliente.email, MessagesUtils.PASSWORD_INVALIDO)
                 .then().statusCode(401)
                 .body("message", Matchers.is(MessagesUtils.EMAIL_SENHA_INVALIDOS));
     }

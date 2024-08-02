@@ -1,4 +1,4 @@
-package core.service.produto;
+package core.controller.produto;
 
 import io.restassured.response.Response;
 

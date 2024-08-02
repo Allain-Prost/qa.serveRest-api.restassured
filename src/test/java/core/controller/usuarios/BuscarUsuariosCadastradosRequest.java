@@ -1,8 +1,6 @@
-package core.service.usuarios;
+package core.controller.usuarios;
 
 import io.restassured.response.Response;
-import org.junit.jupiter.api.parallel.Execution;
-import org.junit.jupiter.api.parallel.ExecutionMode;
 
 import static io.restassured.RestAssured.given;
 

@@ -1,9 +1,9 @@
 package tests.funcional.carrinho;
 
-import core.service.carrinho.CadastrarCarrinhoRequest;
-import core.service.login.RealizarLoginRequest;
-import core.service.produto.CadastrarProdutoRequest;
-import core.service.usuarios.CriarUsuarioRequest;
+import core.controller.carrinho.CadastrarCarrinhoRequest;
+import core.controller.login.RealizarLoginRequest;
+import core.controller.produto.CadastrarProdutoRequest;
+import core.controller.usuarios.CriarUsuarioRequest;
 import data.constants.MessagesUtils;
 import data.produto.ProdutoData;
 import data.usuario.UsuarioData;
